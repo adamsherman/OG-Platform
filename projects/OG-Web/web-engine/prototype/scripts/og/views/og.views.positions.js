@@ -77,6 +77,7 @@ $.register_module({
                                     ui.dialog({type: 'confirm', action: 'close'});
                                     if (result.error) return view.error(result.message);
                                     routes.go(routes.hash(view.rules.load, args));
+                                    setTimeout(function () {view.search(args);});
                                 }, id: routes.current().args.id
                             });
                         },
@@ -135,7 +136,7 @@ $.register_module({
                         $('.OG-layout-admin-details-north').empty();
                     }
                     common.gadgets.positions({
-                        id: args.id, selector: '.og-js-details-positions', view: view,
+                        id: args.id, selector: '.og-js-gadgets-positions', view: view,
                         version: args.version, editable: args.version && args.version !== '*' ? false : true
                     });
                     common.gadgets.trades({

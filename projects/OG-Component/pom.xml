@@ -6,31 +6,58 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.opengamma</groupId>
-    <artifactId>og-parent</artifactId>
-    <version>1.1-SNAPSHOT</version>
-    <relativePath>../..</relativePath>
+    <groupId>com.opengamma.platform</groupId>
+    <artifactId>og-platform-public</artifactId>
+    <version>2.1.0</version>
+    <relativePath>..</relativePath>
   </parent>
   <artifactId>og-component</artifactId>
   <packaging>jar</packaging>
   <name>OG-Component</name>
-  <description>OpenGamma platform component-based configuration</description>
+  <description>OpenGamma Platform component-based configuration</description>
 
   <scm>
     <url>https://github.com/OpenGamma/OG-Platform/tree/master/projects/OG-Component</url>
   </scm>
 
+  <!-- ==================================================================== -->
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>config</directory>
+      </resource>
+    </resources>
+  </build>
+
+  <!-- ==================================================================== -->
   <dependencies>
     <dependency>
-      <groupId>com.opengamma</groupId>
+      <groupId>com.opengamma.platform</groupId>
       <artifactId>og-web</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.opengamma</groupId>
+      <groupId>com.opengamma.platform</groupId>
       <artifactId>og-masterdb</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.opengamma.platform</groupId>
+      <artifactId>og-enginedb</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+    </dependency>
   </dependencies>
+
+  <!-- ==================================================================== -->
+  <properties>
+  </properties>
 
 </project>

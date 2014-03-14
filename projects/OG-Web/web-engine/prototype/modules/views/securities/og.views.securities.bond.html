@@ -1,9 +1,5 @@
 <article>
-  <header class="OG-header-generic">
-    <div class="OG-tools"></div>
-    <h1>{{html name}}</h1>
-    <div class="OG-js-header-links"></div>
-  </header>
+  ${header}
   <section>
     <div class="OG-details-content OG-js-details-panel">
       <section class="og-js-identifiers"></section>
@@ -33,8 +29,14 @@
             <tr><td><span>Coupon Frequency</span></td><td>${couponFrequency}</td></tr>
             <tr class="og-divider"><td></td><td></td></tr>
             <tr><td><span>Day Count</span></td><td>${dayCount}</td></tr>
-            <tr><td><span>Guarantee Type</span></td><td>${guaranteeType}</td></tr>
-            <tr><td><span>Business Day Convention</span></td><td>${businessDayConvention}</td></tr>
+            <tr>
+              <td><span>Guarantee Type</span></td>
+              <td>{{if guaranteeType}}${guaranteeType}{{else}}(no value){{/if}}</td>
+            </tr>
+            <tr>
+              <td><span>Business Day Convention</span></td>
+              <td>{{if businessDayConvention}}${businessDayConvention}{{else}}(no value){{/if}}</td>
+            </tr>
             <tr><td><span>Announcement Date</span></td><td>${announcementDate}</td></tr>
             <tr>
               <td><span>Interest Accrual Date</span></td>
@@ -52,6 +54,7 @@
         </table>
       </section>
       <section class="OG-timeseries-container"></section>
+      ${attributes}
     </div>
   </section>
 </article>

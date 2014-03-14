@@ -6,15 +6,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.opengamma</groupId>
-    <artifactId>og-parent</artifactId>
-    <version>1.1-SNAPSHOT</version>
-    <relativePath>../..</relativePath>
+    <groupId>com.opengamma.platform</groupId>
+    <artifactId>og-platform-public</artifactId>
+    <version>2.1.0</version>
+    <relativePath>..</relativePath>
   </parent>
   <artifactId>og-masterdb</artifactId>
   <packaging>jar</packaging>
   <name>OG-MasterDB</name>
-  <description>OpenGamma platform master database implementation</description>
+  <description>OpenGamma Platform master database implementation</description>
 
   <scm>
     <url>https://github.com/OpenGamma/OG-Platform/tree/master/projects/OG-MasterDB</url>
@@ -22,10 +22,23 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.opengamma</groupId>
+      <groupId>com.opengamma.platform</groupId>
       <artifactId>og-financial</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.opengamma.platform</groupId>
+      <artifactId>og-utildb</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
+  <properties>
+  </properties>
 
 </project>

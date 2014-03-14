@@ -14,10 +14,8 @@ $.register_module({
                         enableCursorHotkey: false, onresize_end: 'og.common.gadgets.manager.resize',
                         togglerLength_open: 0
                     },
-                    north:    {spacing_open: 0, size: 43, paneClass: 'OG-layout-admin-masthead'},
-                    south:    {spacing_open: 0, size: 36, paneClass: 'OG-layout-admin-footer'},
-                    east:     {spacing_closed: 0, initClosed: true}, // Not used
-                    west:     {spacing_open: 7, size: '33%', paneClass: 'OG-layout-admin-search'},
+                    north:    {spacing_open: 0, size: 25, paneClass: 'OG-layout-masthead'},
+                    west:     {spacing_open: 8, size: '33%', paneClass: 'OG-layout-admin-search'},
                     center:   {paneClass: 'ui-layout-details'}
                 }),
                 inner: $('.ui-layout-details').layout({
@@ -41,29 +39,27 @@ $.register_module({
                     }
                 })
             };},
-            analytics: function () {return {
+            analytics_legacy: function () {return {
                 main: $('.OG-layout-admin-container').layout({
                     defaults: {enableCursorHotkey: false},
-                    north: {spacing_open: 0, paneClass: 'OG-layout-admin-masthead', size: 43},
-                    south: {spacing_open: 0, paneClass: 'OG-layout-admin-footer', size: 36},
-                    center: {paneClass: 'OG-layout-analytics', contentSelector: '.ui-layout-content'}
+                    north: {spacing_open: 0, paneClass: 'OG-layout-masthead', size: 25},
+                    center: {paneClass: 'OG-layout-analytics-legacy', contentSelector: '.ui-layout-content'}
                 })
             };},
             gadget: function () {return {
                 main: $('.OG-layout-gadget-container').layout({
-                    defaults: {enableCursorHotkey: false},
+                    defaults: {enableCursorHotkey: false, onresize_end: 'og.common.gadgets.manager.resize'},
                     center: {paneClass: 'OG-gadgets-container'}
                 })
             };},
-            analytics2: function () {return {
+            analytics: function () {return {
                 main: $('.OG-layout-analytics-container').layout({
                     stateManagement: {enabled: true, cookie: {name: 'opengamma_layout_main', path: '/'}},
                     defaults: {
                         enableCursorHotkey: false, onresize_end: 'og.common.gadgets.manager.resize',
                         togglerLength_open: 0
                     },
-                    north: {spacing_open: 0, paneClass: 'OG-layout-analytics-masthead', size: 43},
-                    south: {spacing_open: 0, paneClass: 'OG-layout-analytics-footer', size: 20},
+                    north: {spacing_open: 0, paneClass: 'OG-layout-masthead', size: 67},
                     east: {spacing_open: 7, paneClass: 'OG-layout-analytics-dock', size: "25%"},
                     center: {paneClass: 'OG-layout-analytics2'}
                 }),
@@ -89,6 +85,17 @@ $.register_module({
                     south: {paneSelector: '.OG-layout-analytics-dock-south' ,size: '33%'},
                     center: {paneSelector: '.OG-layout-analytics-dock-center', size: '34%'}
                 })
+            };},
+            blotter: function () {
+                return {
+                    main: $('.OG-layout-blotter-container').layout({
+                        defaults: {
+                            enableCursorHotkey: false, onresize_end: 'og.common.gadgets.manager.resize',
+                            togglerLength_open: 0
+                        },
+                        north: {spacing_open: 0, paneClass: 'OG-layout-blotter-masthead', size: 67},
+                        center: {spacing_open: 0, paneClass: 'OG-layout-analytics-center'}
+                    })
             };}
         };
     }

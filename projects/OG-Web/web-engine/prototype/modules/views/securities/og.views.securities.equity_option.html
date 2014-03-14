@@ -1,9 +1,5 @@
 <article>
-  <header class="OG-header-generic">
-    <div class="OG-tools"></div>
-    <h1>{{html name}}</h1>
-    <div class="OG-js-header-links"></div>
-  </header>
+  ${header}
   <section>
     <div class="OG-details-content OG-js-details-panel">
       <section class="og-js-identifiers"></section>
@@ -25,13 +21,14 @@
             <tr><td><span>Expiry Date</span></td><td>${expiry}</td></tr>
             <tr>
               <td><span>Underlying Identifier</span></td>
-              <td class="OG-js-underlying-id">${underlyingId}</td>
+              <td class="OG-js-underlying-id">${underlyingExternalId}</td>
             </tr>
             <tr><td><span>Currency</span></td><td>${currency}</td></tr>
           </tbody>
         </table>
       </section>
       <section class="OG-timeseries-container"></section>
+      ${attributes}
     </div>
   </section>
 </article>

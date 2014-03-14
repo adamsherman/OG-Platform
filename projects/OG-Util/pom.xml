@@ -6,21 +6,35 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.opengamma</groupId>
-    <artifactId>og-parent</artifactId>
-    <version>1.1-SNAPSHOT</version>
-    <relativePath>../..</relativePath>
+    <groupId>com.opengamma.platform</groupId>
+    <artifactId>og-platform-public</artifactId>
+    <version>2.1.0</version>
+    <relativePath>..</relativePath>
   </parent>
   <artifactId>og-util</artifactId>
   <packaging>jar</packaging>
   <name>OG-Util</name>
-  <description>OpenGamma platform common utilities</description>
+  <description>OpenGamma Platform common utilities</description>
 
   <scm>
     <url>https://github.com/OpenGamma/OG-Platform/tree/master/projects/OG-Util</url>
   </scm>
 
   <dependencies>
+    <dependency>
+      <groupId>com.opengamma.platform</groupId>
+      <artifactId>og-timeseries</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.opengamma.tools</groupId>
+      <artifactId>scripts</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.opengamma</groupId>
+      <artifactId>lambdava</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
@@ -38,6 +52,10 @@
       <artifactId>commons-cli</artifactId>
     </dependency>
     <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
     </dependency>
@@ -45,6 +63,14 @@
     <dependency>
       <groupId>org.fudgemsg</groupId>
       <artifactId>fudge-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.fudgemsg</groupId>
+      <artifactId>fudge-proto</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.threeten</groupId>
+      <artifactId>threetenbp</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
@@ -57,6 +83,7 @@
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.joda</groupId>
@@ -89,9 +116,37 @@
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.codahale.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.codahale.metrics</groupId>
+      <artifactId>metrics-ganglia</artifactId>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
@@ -102,10 +157,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-orm</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
     </dependency>
     <dependency>
@@ -113,17 +164,13 @@
       <artifactId>spring-web</artifactId>
     </dependency>
 
-    <dependency>
+    <!--dependency>  not included as embedded in jersey-core
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>
-    </dependency>
+    </dependency-->
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
+      <artifactId>javax.servlet-api</artifactId>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
@@ -135,19 +182,15 @@
     </dependency>
     <dependency>
       <groupId>com.sun.jersey.contribs</groupId>
-      <artifactId>jersey-spring</artifactId>
+      <artifactId>jersey-multipart</artifactId>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey.contribs</groupId>
-      <artifactId>jersey-multipart</artifactId>
+      <artifactId>jersey-spring</artifactId>
     </dependency>
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.yahoo.platform.yui</groupId>
-      <artifactId>yuicompressor</artifactId>
     </dependency>
 
     <dependency>
@@ -172,60 +215,22 @@
     </dependency>
     <dependency>
       <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-core</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-pool</artifactId>
       <optional>true</optional>
     </dependency>
 
     <dependency>
-      <groupId>com.jolbox</groupId>
-      <artifactId>bonecp</artifactId>
-    </dependency>
-    <!--dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-    </dependency-->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-ehcache</artifactId>
-    </dependency>
-    <dependency>
       <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>javassist</groupId>
-      <artifactId>javassist</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.derby</groupId>
-      <artifactId>derby</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <!--dependency>
-      <groupId>com.microsoft</groupId>
-      <artifactId>sqljdbc</artifactId>
-      <version>3.0</version>
-    </dependency-->
-    <dependency>
       <groupId>org.mongodb</groupId>
       <artifactId>mongo-java-driver</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
     </dependency>
 
     <dependency>
@@ -234,5 +239,8 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <properties>
+  </properties>
 
 </project>

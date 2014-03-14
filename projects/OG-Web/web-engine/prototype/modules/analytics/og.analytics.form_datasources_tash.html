@@ -1,43 +1,18 @@
-<div class="og-option-title">
-  <header class="OG-background-03">data sources:</header>
+<div class="og-menu-toggle og-option-title">
+  <header class="OG-background-05">data sources:</header>
   <ul>
-    {{#each row}}
-    <li>{{this.type}}: {{this.value}}<span>{{^this.last}}then{{/this.last}}</span></li>
-    {{/each}}
+    <li class="datasources-query">Select data source...</li>
   </ul>
   <div class="OG-icon og-icon-down"></div>
 </div>
-<div class="OG-analytics-form-menu og-menu-datasources OG-shadow" style="display: none">
+<div class="OG-analytics-form-menu og-menu-datasources OG-shadow og-menu" style="display: none">
   <div class="OG-background-03"></div>
-  <table>
-    {{#each row}}
-    <tr>
-      <td><span>{{this.num}}</span></td>
-      <td>
-        <select>
-          <option>select...</option>
-          {{#each ../type}}
-          <option>{{this}}</option>
-          {{/each}}
-        </select>
-      </td>
-      <td>
-        <select>
-          <option>select...</option>
-        </select>
-      </td>
-      <td>
-        <div class="OG-icon og-icon-delete"></div>
-      </td>
-    </tr>
-    {{/each}}
-    <tr>
+  <table class="OG-datasources-menu">
+    {{{children}}}
+    <tr class="OG-dropmenu-actions og-menu-actions">
       <td></td>
-      <td><a href="#" class="OG-link-add">add</a></td>
-      <td colspan="2">
-        <button>OK</button>
-        <button>Cancel</button>
-      </td>
+      <td></td>
+      <td colspan="2"><a href="#" class="OG-link-add">add</a></td>
     </tr>
   </table>
 </div>

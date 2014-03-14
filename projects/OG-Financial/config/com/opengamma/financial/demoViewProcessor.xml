@@ -150,19 +150,21 @@
   
   <bean id="bloombergVolatilityCubeDefinitionSource" class="com.opengamma.financial.analytics.volatility.cube.BloombergVolatilityCubeDefinitionSource">
   </bean>
-
   <bean id="mainViewDefinitionRepository" class="com.opengamma.web.spring.ConfigDbViewDefinitionRepositoryFactoryBean">
-   <property name="configMaster" ref="dbConfigMaster" />
+    <property name="configMaster" ref="dbConfigMaster" />
   </bean>
   
-  <bean id="userViewDefinitionRepository" class="com.opengamma.financial.view.memory.InMemoryViewDefinitionRepository" />
-  <bean id="combinedViewDefinitionRepository" class="com.opengamma.engine.view.AggregatingViewDefinitionRepository">
+  <bean id="userViewDefinitionRepository" class="com.opengamma.master.config.impl.InMemoryConfigMaster" />
+  <bean id="aggregatingReadOnlyConfigMaster" class="com.opengamma.engine.view.AggregatingReadOnlyConfigMaster">
     <constructor-arg>
       <list>
         <ref bean="mainViewDefinitionRepository" />
         <ref bean="userViewDefinitionRepository" />
       </list>
     </constructor-arg>
+  </bean>
+  <bean id="combinedViewDefinitionRepository" class="com.opengamma.master.config.impl.MasterConfigSource">
+    <constructor-arg ref="aggregatingReadOnlyConfigMaster"/>
   </bean>
 
   <!-- marketDataProviderResolver -->
@@ -173,7 +175,7 @@
     <property name="securitySource" ref="combinedSecuritySource" />
     <property name="positionSource" ref="combinedPositionSource" />
     <property name="regionSource" ref="sharedRegionSource"/>
-    <property name="configSource" ref="sharedConfigSource" />
+    <property name="configMaster" ref="sharedConfigSource" />
     <property name="conventionBundleSource" ref="sharedConventionBundleSource"/>
     <property name="interpolatedYieldCurveDefinitionSource" ref="combinedInterpolatedYieldCurveDefinitionSource" />
     <property name="interpolatedYieldCurveSpecificationBuilder" ref="sharedInterpolatedYieldCurveSpecificationBuilder" />
@@ -193,7 +195,7 @@
     <property name="exchangeSource" ref="sharedExchangeSource"/>
     <property name="holidaySource" ref="sharedHolidaySource"/>
     <property name="conventionBundleSource" ref="sharedConventionBundleSource"/>
-    <property name="configSource" ref="sharedConfigSource" />
+    <property name="configMaster" ref="sharedConfigSource" />
     <property name="overrideOperationCompiler" ref="mainOverrideOperationCompiler" />
   </bean>
 
@@ -204,8 +206,8 @@
   <!-- Functions -->
   <bean id="mainCompiledFunctionService" class="com.opengamma.engine.function.CompiledFunctionService">
     <constructor-arg>
-      <bean class="com.opengamma.engine.function.config.RepositoryFactoryBean">
-        <property name="repositoryConfigurationSource" ref="sharedRepositoryConfigurationSource" />
+      <bean class="com.opengamma.engine.function.config.FunctionRepositoryFactoryBean">
+        <property name="functionConfigurationSource" ref="sharedFunctionConfigurationSource" />
       </bean>
     </constructor-arg>
     <constructor-arg>
@@ -271,7 +273,6 @@
 				    <property name="viewComputationCache" ref="mainComputationCacheSource" />
 				    <property name="functionCompilationService" ref="mainCompiledFunctionService" />
 				    <property name="functionExecutionContext" ref="mainFunctionExecutionContext" />
-				    <property name="computationTargetResolver" ref="mainComputationTargetResolver" />
 				    <property name="viewProcessorQuery" ref="mainViewProcessorQuerySender" />
 				    <property name="writeBehindExecutorService">
 				      <null/> <!-- The cache is so fast, and CPU bound, that write behind just slows us down on many core systems -->
@@ -340,11 +341,10 @@
   </bean>
   <bean id="mainViewProcessor" class="com.opengamma.engine.view.ViewProcessorFactoryBean">
     <property name="name" value="main" />
-    <property name="viewDefinitionRepository" ref="combinedViewDefinitionRepository" />
+    <property name="configSource" ref="combinedViewDefinitionRepository" />
     <property name="liveMarketDataSourceRegistry" ref="standardLiveMarketDataSourceRegistry" />
     <property name="securitySource" ref="combinedSecuritySource" />
     <property name="positionSource" ref="combinedPositionSource" />
-    <property name="computationTargetResolver" ref="mainComputationTargetResolver" />
     <property name="functionCompilationService" ref="mainCompiledFunctionService" />
     <property name="functionResolver" ref="mainFunctionResolver" />
     <property name="functionExclusionGroups" ref="mainFunctionExclusionGroups" />
@@ -460,6 +460,12 @@
         <bean class="com.opengamma.financial.aggregation.LongShortAggregationFunction">
           <constructor-arg ref="combinedSecuritySource" />
           <constructor-arg value="false" />
+        </bean>
+        <bean class="com.opengamma.financial.aggregation.StrikeAggregationFunction">
+          <constructor-arg ref="combinedSecuritySource" />
+        </bean>
+        <bean class="com.opengamma.financial.aggregation.ExpiryAggregationFunction">
+          <constructor-arg ref="combinedSecuritySource" />
         </bean>
       </list>
      </property>

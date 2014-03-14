@@ -1,9 +1,5 @@
 <article>
-  <header class="OG-header-generic">
-    <div class="OG-tools"></div>
-    <h1>{{html name}}</h1>
-    <div class="OG-js-header-links"></div>
-  </header>
+  ${header}
   <section>
     <div class="OG-details-content OG-js-details-panel">
       <section class="og-js-identifiers"></section>
@@ -23,10 +19,16 @@
             <tr><td><span>End Date</span></td><td>${endDate.date} - ${endDate.zone}</td></tr>
             <tr><td><span>Rate</span></td><td>${rate}</td></tr>
             <tr><td><span>Region</span></td><td>${region}</td></tr>
+            <tr>
+              <td><span>Reference Rate</span></td>
+              <td>{{if underlyingName}}${underlyingName}{{else}}(no value){{/if}}</td>
+            </tr>
+            <tr><td><span>Underlying ID</span></td><td class="OG-js-underlying-id">${underlyingId}</td></tr>
           </tbody>
         </table>
       </section>
       <section class="OG-timeseries-gadget"></section>
+      ${attributes}
     </div>
   </section>
 </article>

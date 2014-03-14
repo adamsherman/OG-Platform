@@ -6,15 +6,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.opengamma</groupId>
-    <artifactId>og-parent</artifactId>
-    <version>1.1-SNAPSHOT</version>
-    <relativePath>../..</relativePath>
+    <groupId>com.opengamma.platform</groupId>
+    <artifactId>og-platform-public</artifactId>
+    <version>2.1.0</version>
+    <relativePath>..</relativePath>
   </parent>
   <artifactId>og-livedata</artifactId>
   <packaging>jar</packaging>
   <name>OG-LiveData</name>
-  <description>OpenGamma platform live data API</description>
+  <description>OpenGamma Platform live data API</description>
 
   <scm>
     <url>https://github.com/OpenGamma/OG-Platform/tree/master/projects/OG-LiveData</url>
@@ -22,12 +22,12 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.opengamma</groupId>
+      <groupId>com.opengamma.platform</groupId>
       <artifactId>og-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.opengamma</groupId>
+      <groupId>com.opengamma.platform</groupId>
       <artifactId>og-security</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -35,13 +35,29 @@
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-core</artifactId>
+      <optional>true</optional>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-pool</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <optional>true</optional>
+    </dependency>
+    
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <properties>
+    <fudge.proto.equals>false</fudge.proto.equals>
+    <fudge.proto.hashCode>false</fudge.proto.hashCode>
+  </properties>
 
 </project>

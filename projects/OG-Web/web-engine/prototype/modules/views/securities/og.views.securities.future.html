@@ -1,9 +1,5 @@
 <article>
-  <header class="OG-header-generic">
-    <div class="OG-tools"></div>
-    <h1>{{html name}}</h1>
-    <div class="OG-js-header-links"></div>
-  </header>
+  ${header}
   <section>
     <div class="OG-details-content OG-js-details-panel">
       <section class="og-js-identifiers"></section>
@@ -22,6 +18,7 @@
             <tr><td><span>Trading Exchange</span></td><td>${tradingExchange}</td></tr>
             <tr><td><span>Settlement Exchange</span></td><td>${settlementExchange}</td></tr>
             <tr><td><span>Redemption Value</span></td><td>${redemptionValue}</td></tr>
+            <tr><td><span>Unit Amount</span></td><td>${unitAmount}</td></tr>
             {{if underlyingId}}
               <tr>
                 <td><span>Underlying Identifier</span></td>
@@ -39,6 +36,7 @@
         </table>
       </section>
       <section class="OG-timeseries-container"></section>
+      ${attributes}
     </div>
   </section>
 </article>

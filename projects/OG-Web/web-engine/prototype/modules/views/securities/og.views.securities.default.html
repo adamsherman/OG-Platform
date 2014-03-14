@@ -1,9 +1,5 @@
 <article>
-  <header class="OG-header-generic">
-    <div class="OG-tools"></div>
-    <h1>{{html name}}</h1>
-    <div class="OG-js-header-links"></div>
-  </header>
+  ${header}
   <section>
     <div class="OG-details-content OG-js-details-panel">
       <section class="og-js-identifiers"></section>
@@ -13,7 +9,7 @@
           <col style="width: 60%" />
           <thead>
             <tr>
-              <th><span>${securityType.lang()}</span></th><th>&nbsp;</th>
+              <th><span><em>${securityType.lang()}</em></span></th><th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +18,7 @@
         </table>
       </section>
       <section class="OG-timeseries-container"></section>
+      ${attributes}
     </div>
   </section>
 </article>

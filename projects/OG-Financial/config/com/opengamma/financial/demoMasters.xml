@@ -15,7 +15,7 @@
   <!-- Active MQ -->
   <bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
     <constructor-arg value="${activeMQ.brokerURL}" />
-    <property name="WatchTopicAdvisories" value="false" /> <!-- IGN-94 -->
+    <property name="watchTopicAdvisories" value="false" /> <!-- IGN-94 -->
   </bean>
   <bean id="jmsConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop"> 
     <constructor-arg ref="activeMQConnectionFactory"/>
@@ -188,7 +188,7 @@
     <property name="dbConnector" ref="finDbConnector" />
     <property name="uniqueIdScheme" value="${opengamma.financial.db.portfoliomaster.scheme}" />
     <property name="jmsConnector" ref="jmsConnector" />
-    <property name="jmsChangeManagerTopic" value="dbPortfolioMasterChangeManager" />
+    <property name="jmsChangeManagerTopic" value="OpenGamma.MasterChange.PortfolioMaster.central" />
   </bean>
   <bean id="dbPositionMaster" class="com.opengamma.masterdb.spring.DbPositionMasterFactoryBean">
     <property name="dbConnector" ref="finDbConnector" />
@@ -213,7 +213,7 @@
   
   <!-- Default HTS Resolver with no BBG dep -->
   <bean id="htsResolver" class="com.opengamma.financial.spring.DefaultHistoricalTimeSeriesResolverFactoryBean">
-    <property name="configSource" ref="sharedConfigSource" />
+    <property name="configMaster" ref="sharedConfigSource" />
     <property name="historicalTimeSeriesMaster" ref="dbHtsMaster" />
   </bean>
   
@@ -228,7 +228,7 @@
     <property name="dbConnector" ref="finDbConnector" />
     <property name="uniqueIdScheme" value="${opengamma.financial.db.snapshotmaster.scheme}" />
     <property name="jmsConnector" ref="jmsConnector" />
-    <property name="jmsChangeManagerTopic" value="dbSnapshotMasterChangeManager" />
+    <property name="jmsChangeManagerTopic" value="OpenGamma.MasterChange.MarketDataSnapshotMaster.central" />
   </bean>
   <bean id="sharedSnapshotSource" class="com.opengamma.financial.spring.MarketDataSnapshotSourceFactoryBean">
     <property name="snapshotMaster" ref="dbSnapshotMaster"/>
@@ -293,7 +293,7 @@
 
   <!-- ================================================================== -->
   <!-- Function configuration -->
-  <bean id="sharedRepositoryConfigurationSource" class="com.opengamma.engine.function.config.CombiningRepositoryConfigurationSource">
+  <bean id="sharedFunctionConfigurationSource" class="com.opengamma.engine.function.config.CombiningFunctionConfigurationSource">
     <constructor-arg>
       <list>
         <bean class="com.opengamma.web.spring.DemoStandardFunctionConfiguration" />
